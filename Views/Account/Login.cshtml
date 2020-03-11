@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+
+username: <input type="text" id="username" />
+Pw: <input type="text" id="userpw" />
+<input type="button" id="btnEmailLogin" value="submit"/>
+
+
+
+
+<script>
+    $(function () {
+
+        $('#btnEmailLogin').on('click', function (event) {
+            event.preventDefault();
+
+            var uname = $("#username").val().trim();
+            var upw = $("#userpw").val().trim();
+
+            $.ajax({
+                url: '/Account/LoginWithEmail',
+                type: "POST",
+                dataType: "JSON",
+                data: { username: uname, Password: upw },
+                success: function (returndata) {
+                    
+                    location.href = "/";
+                },
+                error: function () {
+                    alert('Something went wrong');
+
+                }
+            });
+
+
+
+        });
+
+
+    });
+    
+</script>
+
